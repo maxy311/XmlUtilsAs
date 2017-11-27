@@ -17,30 +17,21 @@ public class DeleteStringUtils {
     private static final String SPLIT = "\">";
 
     private static final Map<String, List<String>> DELETE_IDS = new HashMap<>();
-    private static final String res = "/Users/maxy/Android/workspace/App/res";
+    private static final String res = "/Users/maxy/Android/workspace/SHAREit/App/res";
 
     static {
         List<String> ids = new ArrayList<>();
 
-//        ids.add("<string name=\"setting_saving_failed_tip");
-//
-//        DELETE_IDS.put("setting_strings.xml", ids);
-//
-//
-//        ids.add("<string name=\"navigation_rateus_name");
-//        ids.add("<string name=\"navigation_games_name");
-//        DELETE_IDS.put("navigation_strings.xml", ids);
 
+        ids.add("<string name=\"feed_music_local_title_3");
+        ids.add("<string name=\"feed_music_local_msg_1");
+        ids.add("<string name=\"feed_music_local_msg_2");
 
-//         <!--the below only appear in WW version -->
-//    <string name="about_google_help_us_localization">Help us with Localization</string>
-//    <string name="about_google_mail_not_install">No Installed Email Client</string>
-//    <string name="about_google_help_us_testing">Help us with Testing</string>
-//
-        ids.add("<string name=\"about_google_help_us_localization");
-        ids.add("<string name=\"about_google_mail_not_install");
-        ids.add("<string name=\"about_google_help_us_testing");
-        DELETE_IDS.put("about_strings.xml", ids);
+        ids.add("<string name=\"feed_video_local_title_3");
+        ids.add("<string name=\"feed_video_local_msg_1");
+        ids.add("<string name=\"feed_video_local_msg_2");
+        DELETE_IDS.put("feed_strings.xml", ids);
+
     }
 
     public static void startDelete() {
@@ -55,13 +46,14 @@ public class DeleteStringUtils {
         Set<String> keys = deleteIds.keySet();
         for (String key : keys) {
             List<String> ids = deleteIds.get(key);
-            if (ids.size() == 1)
-                deleteStringInFile(ids.get(0), key);
-            else if (ids.size() > 1) {
-                deleteStringsInFile(ids, key);
-            } else {
-                return;
-            }
+//            if (ids.size() == 1)
+//                deleteStringInFile(ids.get(0), key);
+//            else if (ids.size() > 1) {
+//                deleteStringsInFile(ids, key);
+//            } else {
+//                return;
+//            }
+            deleteStringsInFile(ids, key);
         }
     }
 

@@ -1,6 +1,5 @@
 package com.example;
 
-import com.wutian.maxy.xml.operate.DeleteStringUtils;
 import com.wutian.xml.file.FileUtils;
 import com.wutian.xml.file.TranslateHelper;
 
@@ -10,24 +9,26 @@ import java.util.Map;
 import java.util.Set;
 
 public class XMLOperate {
-    private static String resPath = "/Users/maxy/Android/workspace/App/res";
+    private static String resPath = "/Users/maxy/Android/workspace/SHAREit/App/res";
 
     public static void main(String[] args) {
-        DeleteStringUtils.startDelete();
+//        DeleteStringUtils.startDelete();
 //        getTranslateMethod();
-//        addTranslateMethod();
+        addTranslateMethod();
+
+//        XlaregeUtils.outPutXlarege();
     }
 
     private static void addTranslateMethod() {
-        String transPath = "/Users/maxy/Downloads/LXQ-0062_Clean_0704";
+        String transPath = "/Users/maxy/Downloads/LXQ-0080_Clean_37L_1229";
         TranslateHelper translateHelper = new TranslateHelper();
         translateHelper.addTranslateToValues(resPath, transPath);
     }
 
     private static void getTranslateMethod() {
         String valuePath = resPath + "/" + "values";
-        String valuePath_Ar = resPath + "/" + "values-ar";
-        String savePath = "/Users/maxy/Desktop/res2";
+        String valuePath_Ar = resPath + "/" + "values-ar";   //"/Users/maxy/Desktop/values";//
+        String savePath = "/Users/maxy/Desktop/res3";
         TranslateHelper translateHelper = new TranslateHelper();
         translateHelper.getTranslateStrings(valuePath, valuePath_Ar, savePath, true);
     }

@@ -319,6 +319,8 @@ public class TranslateHelper {
             String defaultValue;
             for (String line : lines) {
                 String[] strs = line.trim().split("\">");
+                if (line.contains("<string-array") || line.contains("<integer-array"))
+                    strs = line.trim().split("\n");
 
                 if (strs.length >= 2) {
                     String key = strs[0];

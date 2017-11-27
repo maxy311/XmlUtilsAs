@@ -96,6 +96,16 @@ public class FileUtils {
                     } else if (line.contains("<item quantity")) {
                         sb.append("\n" + line);
                     }
+                } else if (line.contains("-array") || (line.contains("<item>") && line.contains("</item>"))) {
+                    if (line.trim().startsWith("<string-array") || line.trim().startsWith("<integer-array"))
+                        sb.append(line);
+                    else if (line.trim().startsWith("</string-array>") || line.trim().startsWith("</integer-array>")) {
+                        sb.append("\n" + line);
+                        lines.add(sb.toString());
+                        sb.setLength(0);
+                    } else if ((line.contains("<item>") && line.contains("</item>"))) {
+                        sb.append("\n" + line);
+                    }
                 } else
                     lines.add(line);
             }
@@ -144,7 +154,7 @@ public class FileUtils {
                     continue;
 
                 line = line.trim();
-                if (!(line.startsWith("<string name=") || line.contains("plurals") || line.contains("<item quantity")))
+                if (!(line.startsWith("<string") || line.contains("plurals") || line.contains("<item") || line.contains("-array")))
                     continue;
 
                 if (line.contains("plurals") || line.contains("<item quantity")) {
@@ -153,13 +163,27 @@ public class FileUtils {
                             str = line.split("\">")[0];
                             sb.append(line);
                         } else if (line.startsWith("</plurals>")) {
-                            sb.append("\n" + line);
+                            sb.append("\n" + "    " + line);
                             map.put(str, sb.toString());
                             str = "";
                             sb.setLength(0);
                         }
                     } else if (line.contains("<item quantity")) {
+                        sb.append("\n" + "        " + line);
+                    }
+                } else if ((line.contains("-array") || line.contains("-array")) || (line.startsWith("<item>") && line.endsWith("</item>"))) {
+                    if ((line.contains("<string-array") || line.contains("<integer-array"))) {
+                        str = line;
+                        sb.append(line);
+                    } else if (line.startsWith("<item>") && line.endsWith("</item>")) {
+                        if (str == "" || str.equals(""))
+                            continue;
+                        sb.append("\n" + "        " + line);
+                    } else if (line.startsWith("</string-array>") || line.startsWith("</integer-array>")) {
                         sb.append("\n" + "    " + line);
+                        map.put(str, sb.toString());
+                        str = "";
+                        sb.setLength(0);
                     }
                 } else {
                     String strs[] = line.split("\">");
