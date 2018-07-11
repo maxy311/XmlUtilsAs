@@ -1,5 +1,6 @@
 package com.example;
 
+import com.wutian.maxy.xml.operate.DeleteStringUtils;
 import com.wutian.xml.file.FileUtils;
 import com.wutian.xml.file.TranslateHelper;
 
@@ -9,28 +10,32 @@ import java.util.Map;
 import java.util.Set;
 
 public class XMLOperate {
-    private static String resPath = "/Users/maxy/Android/workspace/SHAREit/App/res";
-
+//    private static String resPath = "/Users/maxy/Android/workspace/SHAREit/App/res";
+    private static String resPath = "/Users/maxy/Android/workspace/SHAREit/App/src/main/res";
     public static void main(String[] args) {
 //        DeleteStringUtils.startDelete();
-//        getTranslateMethod();
-        addTranslateMethod();
+        getTranslateMethod();
+//        addTranslateMethod();
 
 //        XlaregeUtils.outPutXlarege();
     }
 
     private static void addTranslateMethod() {
-        String transPath = "/Users/maxy/Downloads/LXQ-0080_Clean_37L_1229";
+        String transPath = "/Users/maxy/Desktop/translate";
         TranslateHelper translateHelper = new TranslateHelper();
         translateHelper.addTranslateToValues(resPath, transPath);
     }
 
     private static void getTranslateMethod() {
         String valuePath = resPath + "/" + "values";
-        String valuePath_Ar = resPath + "/" + "values-ar";   //"/Users/maxy/Desktop/values";//
-        String savePath = "/Users/maxy/Desktop/res3";
+        String valuePath_Ar = resPath + "/" + "values-bn";   //"/Users/maxy/Desktop/values";//
+//        String valueOriginPaht = "/Users/maxy/Desktop/origin/values";
+        String savePath = "/Users/maxy/Desktop/res2";
         TranslateHelper translateHelper = new TranslateHelper();
         translateHelper.getTranslateStrings(valuePath, valuePath_Ar, savePath, true);
+
+        //value compare value
+//        translateHelper.getTranslateStrings(valuePath, valueOriginPaht, savePath, false);
     }
 
     private static void testCopyFile() {

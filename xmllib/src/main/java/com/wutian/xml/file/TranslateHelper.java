@@ -7,6 +7,7 @@ import com.wutian.xml.file.task.TranslateTask;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -43,12 +44,28 @@ public class TranslateHelper {
         if (!saveFile.exists())
             saveFile.mkdirs();
 
-        for (File origin : originFile.listFiles()) {
-            String fileName = origin.getName();
-            if (!fileName.contains("string") || fileName.contains("filter") || fileName.contains("dimens")
-                    || fileName.contains("account") || fileName.contains("product_setting"))
-                continue;
+        File[] files = originFile.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                String name = pathname.getName();
+                if (!name.contains("string"))
+                    return false;
+                if (name.contains("filter"))
+                    return false;
+                if (name.contains("dimens"))
+                    return false;
+                if (name.contains("account"))
+                    return false;
+                if (name.contains("product_setting"))
+                    return false;
+                if (name.contains("country_code_string"))
+                    return false;
+                return true;
+            }
+        });
 
+        for (File origin : files) {
+            String fileName = origin.getName();
             if (origin.isDirectory()) {
                 getTranslate(originFile + File.separator + fileName, targetPath + File.separator + fileName, savePath,
                         isCompareAr);
@@ -100,11 +117,8 @@ public class TranslateHelper {
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(saveFile)));
-            writer.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-            writer.newLine();
-            writer.write("<resources>");
-            writer.flush();
-            writer.newLine();
+            writeFileHeader(writer);
+
             for (String key : originKeys) {
                 if (key.contains("translate") || key.contains("translatable") || key.contains("<plurals name="))
                     continue;
@@ -122,8 +136,7 @@ public class TranslateHelper {
                 writer.newLine();
                 selectKeys.add(key);
             }
-            writer.write("</resources>");
-            writer.flush();
+            writerFileEnd(writer);
         } catch (IOException e) {
         } finally {
             try {
@@ -137,6 +150,19 @@ public class TranslateHelper {
             tryToGetZhString(originFile, saveFile, selectKeys);
         else
             saveFile.delete();
+    }
+
+    private static final void writerFileEnd(BufferedWriter writer) throws IOException {
+        writer.write("</resources>");
+        writer.flush();
+    }
+
+    private static final void writeFileHeader(BufferedWriter writer) throws IOException {
+        writer.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+        writer.newLine();
+        writer.write("<resources>");
+        writer.flush();
+        writer.newLine();
     }
 
     private static void tryToGetZhString(File originFile, File saveFile, List<String> selectKeys) {
@@ -263,6 +289,7 @@ public class TranslateHelper {
 
     private void addTranslate(String resPath, String translatePath) {
         File originDir = new File(resPath);
+        System.out.println(originDir.getAbsolutePath());
         if (!originDir.exists())
             return;
 

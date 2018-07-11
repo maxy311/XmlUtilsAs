@@ -17,21 +17,29 @@ public class DeleteStringUtils {
     private static final String SPLIT = "\">";
 
     private static final Map<String, List<String>> DELETE_IDS = new HashMap<>();
-    private static final String res = "/Users/maxy/Android/workspace/SHAREit/App/res";
+    private static final String res = "/Users/maxy/Android/workspace/SHAREit/App/src/main/res";
 
     static {
         List<String> ids = new ArrayList<>();
 
 
-        ids.add("<string name=\"feed_music_local_title_3");
-        ids.add("<string name=\"feed_music_local_msg_1");
-        ids.add("<string name=\"feed_music_local_msg_2");
+        ids.add("<string name=\"coins_guide_1000_coins");
+        ids.add("<string name=\"coins_guide_login_to_collect");
 
-        ids.add("<string name=\"feed_video_local_title_3");
-        ids.add("<string name=\"feed_video_local_msg_1");
-        ids.add("<string name=\"feed_video_local_msg_2");
-        DELETE_IDS.put("feed_strings.xml", ids);
 
+        ids.add("<string name=\"coins_guide_tip");
+
+//
+//        ids.add("<string name=\"new_version_guide_dialog_local");
+//        ids.add("<string name=\"new_version_guide_dialog_shareit");
+//
+//        ids.add("<string name=\"new_version_guide_dialog_daily");
+        DELETE_IDS.put("coins_strings.xml", ids);
+
+    }
+
+    public static void main(String[] args){
+        startDelete();
     }
 
     public static void startDelete() {
