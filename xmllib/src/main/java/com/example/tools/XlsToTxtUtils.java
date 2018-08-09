@@ -129,12 +129,19 @@ public class XlsToTxtUtils {
                 writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile)));
 
                 for(int i=0;i<result.length;i++) {
-                    LinkedList linkedList = result[i];
+                    LinkedList<String> linkedList = result[i];
                     if (linkedList.isEmpty())
                         continue;
+                    StringBuilder sb = new StringBuilder();
+                    for (String str : linkedList) {
+                        sb.append(str + ",");
+                    }
 
-                    String str = linkedList.get(0) + "," + linkedList.get(1) + ",0";
-                    writer.write(str);
+                    String str = sb.toString().substring(0, sb.length() - 1);
+
+//                    <string name="about_name">About</string>
+                    String xmlStr = "<string name=\"" + linkedList.get(0) + "\">" + linkedList.get(2)+ "</string>" ;
+                    writer.write(xmlStr);
                     writer.flush();
                     writer.newLine();
                 }
@@ -148,8 +155,8 @@ public class XlsToTxtUtils {
 
     public static void main(String[] args) {
         XlsToTxtUtils poi = new XlsToTxtUtils();
-        String path = "/Users/maxy/Desktop/shareit_events_desk.xls";
-        String outPath = "/Users/maxy/Desktop/aaaaaa.txt";
+        String path = "/Users/maxy/Desktop/country2.xls";
+        String outPath = "/Users/maxy/Desktop/aaaaaa.xml";
         poi.loadExcel(path);
         poi.init();
         poi.show(outPath);

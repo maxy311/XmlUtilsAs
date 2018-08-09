@@ -154,6 +154,9 @@ public class FileUtils {
                     continue;
 
                 line = line.trim();
+                if (line.startsWith("  "))
+                    line = line.replace("  ", "");
+                line = line.trim();
                 if (!(line.startsWith("<string") || line.contains("plurals") || line.contains("<item") || line.contains("-array")))
                     continue;
 
