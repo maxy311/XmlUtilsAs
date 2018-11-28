@@ -12,20 +12,15 @@ public class TranslateHelpers {
     private static String SHELL_PATH = "/Users/maxy/Android/workspace/XmlUtilsAs/git-for-all.sh";
     private static String SHAREIT_resPath_VALUE_OLD ="/Users/maxy/Android/workspace/SHAREit/App/src/main/res/values_old";
     private static String DESKTOP_PATH = "/Users/maxy/Desktop";
-    public static void main(String[] args) {
-//        getTranslate("v4.5.38_ww");
-        addTranslate();
-    }
 
-    private static void addTranslate() {
-        String translatePath = "/Users/maxy/Desktop/res";
+    public static void addTranslate(String translatePath) {
         File translateResFile = new File(translatePath);
         File resDir = new File(SHAREIT_resPath);
         AddTransLateHelper addTransLateHelper = new AddTransLateHelper();
         addTransLateHelper.addTranslate(translateResFile, resDir);
     }
 
-    private static void getTranslate(String preTag) {
+    public static void getTranslate(String preTag) {
         // 1 , checkout last version
         runShellCmd(preTag);
         System.out.println("has checkout to pre version \n\n\n\n\n\n");
@@ -53,9 +48,9 @@ public class TranslateHelpers {
     private static void toGetTranslate(GetTransLateHelper.GetTransLateListener getTransLateListener) {
         File oldValueFile = new File(SHAREIT_resPath_VALUE_OLD);
         File valueFile = new File(SHAREIT_resPath, "values");
-        File valueArFile = new File(SHAREIT_resPath, "values-ta");
+        File valueArFile = new File(SHAREIT_resPath, "values-bn");
 
-        String saveDirPath = DESKTOP_PATH + "/res3";
+        String saveDirPath = DESKTOP_PATH + "/res";
         GetTransLateHelper transLateHelper = new GetTransLateHelper();
         transLateHelper.setGetTransLateListener(getTransLateListener);
         transLateHelper.getTranslate(valueFile, valueArFile, oldValueFile, saveDirPath);

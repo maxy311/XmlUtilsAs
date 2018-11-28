@@ -23,18 +23,13 @@ public class DeleteStringUtils {
         List<String> ids = new ArrayList<>();
 
 
-        ids.add("<string name=\"coins_guide_1000_coins");
-        ids.add("<string name=\"coins_guide_login_to_collect");
+        ids.add("<string name=\"discovery_more_text");
 
-
-        ids.add("<string name=\"coins_guide_tip");
-
-//
 //        ids.add("<string name=\"new_version_guide_dialog_local");
 //        ids.add("<string name=\"new_version_guide_dialog_shareit");
 //
 //        ids.add("<string name=\"new_version_guide_dialog_daily");
-        DELETE_IDS.put("coins_strings.xml", ids);
+        DELETE_IDS.put("video_strings.xml", ids);
 
     }
 

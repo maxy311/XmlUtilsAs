@@ -35,7 +35,7 @@ public class ReplaceSpecialChar {
     }
 
     private ReplaceSpecialChar() {
-        mFixedThreadPool = Executors.newFixedThreadPool(8);
+        mFixedThreadPool = Executors.newCachedThreadPool();//Executors.newFixedThreadPool(8);
         mEndCounter = new AtomicInteger(0);
         replaceMap = new HashMap<>();
     }
@@ -80,7 +80,6 @@ public class ReplaceSpecialChar {
                 }
                 final File finalFile = valueFile;
                 mStartCounter++;
-                System.out.println("start --------- " + mStartCounter);
                 mFixedThreadPool.submit(new Runnable() {
                     @Override
                     public void run() {
@@ -90,7 +89,6 @@ public class ReplaceSpecialChar {
                             System.out.println(e.toString());
                         } finally {
                             mEndCounter.incrementAndGet();
-                            System.out.println("end ------------------------ " + mEndCounter);
                         }
 
                     }
@@ -119,10 +117,11 @@ public class ReplaceSpecialChar {
                 if (line == null)
                     break;
 
-                line = checkAndReplaceSpecialChar(line, "\u2028", " ");
-                line = checkAndReplaceSpecialChar(line, "\u2029", " ");
-                line = checkAndReplaceSpecialChar(line, "\uFEFF", " ");
-                line = checkAndReplaceSpecialChar(line, "\u00A0", " ");
+                line = checkAndReplaceSpecialChar(line, "\u2028", " ","2028"); //行分隔符	行结束符
+                line = checkAndReplaceSpecialChar(line, "\u2029", " ", "2029"); //段落分隔符	行结束符
+                line = checkAndReplaceSpecialChar(line, "\uFEFF", " ", "FEFF");//字节顺序标记	空白
+                line = checkAndReplaceSpecialChar(line, "\u00A0", " ", "00A0");
+//                line = checkAndReplaceSpecialChar(line, "%", "%");
                 line = checkAndReplaceSpecialChar2(line); // '-------> \'
 
                 writer.write(line);
@@ -140,8 +139,9 @@ public class ReplaceSpecialChar {
     }
 
 
-    private String checkAndReplaceSpecialChar(String line, String replaceTarget, String replaceStr) {
+    private String checkAndReplaceSpecialChar(String line, String replaceTarget, String replaceStr, String tag) {
         boolean hasChanged = false;
+        String originLine = line;
         while (line.indexOf(replaceTarget) != -1) {
             hasChanged = true;
             line = line.replace(replaceTarget, replaceStr);
@@ -151,6 +151,11 @@ public class ReplaceSpecialChar {
             if (replaceList == null)
                 replaceList = new ArrayList<>();
             replaceList.add(line);
+
+            System.out.println(tag);
+            System.out.println("oldLine     " + originLine);
+            System.out.println("newLine     " + originLine);
+            System.out.println();
         }
         return line;
     }
@@ -158,7 +163,7 @@ public class ReplaceSpecialChar {
     // '  ------------------>   \'
     private String checkAndReplaceSpecialChar2(String line) {
         boolean hasChanged = false;
-
+        String originLine = line;
         if (line.indexOf("'") != -1) {
             char[] chars = line.toCharArray();
             char lastChar = '1';
@@ -176,6 +181,11 @@ public class ReplaceSpecialChar {
             if (hasChanged) {
                 line = sb.toString();
                 sb.setLength(0);
+
+                System.out.println("\'");
+                System.out.println("oldLine     " + originLine);
+                System.out.println("newLine     " + originLine);
+                System.out.println();
             }
         }
 

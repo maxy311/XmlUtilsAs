@@ -1,5 +1,7 @@
 package com.wutian.xml.file;
 
+import com.wutian.utils.Utils;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -16,6 +19,19 @@ import java.util.List;
 import java.util.Map;
 
 public class FileUtils {
+    public static void fileChannelCopy(File src,File dst) {
+        FileChannel inChannel = null;
+        FileChannel outChannel = null;
+        try {
+            inChannel = new FileInputStream(src).getChannel();
+            outChannel = new FileOutputStream(dst).getChannel();
+            inChannel.transferTo(0, inChannel.size(), outChannel);
+        } catch (IOException e) {
+        } finally {
+            Utils.close(inChannel);
+            Utils.close(outChannel);
+        }
+    }
 
     public static void copyFile(String originPath, String targetPath) {
         copyFile(new File(originPath), new File(targetPath));
@@ -54,19 +70,8 @@ public class FileUtils {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (reader != null)
-                    reader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                if (writer != null)
-                    writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Utils.close(reader);
+            Utils.close(writer);
         }
     }
 
@@ -114,12 +119,7 @@ public class FileUtils {
         } catch (IOException e) {
             return lines;
         } finally {
-            try {
-                if (reader != null)
-                    reader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Utils.close(reader);
         }
         return lines;
     }
@@ -203,12 +203,7 @@ public class FileUtils {
         } catch (IOException e) {
             return null;
         } finally {
-            try {
-                if (reader != null)
-                    reader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Utils.close(reader);
         }
 
     }

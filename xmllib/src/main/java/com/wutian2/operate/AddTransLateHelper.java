@@ -1,9 +1,9 @@
 package com.wutian2.operate;
 
+import com.wutian.utils.ReplaceSpecialCharUtils;
 import com.wutian.xml.file.FileUtils;
 import com.wutian.xml.file.task.AddTranslateTask;
 import com.wutian.xml.file.task.Task;
-import com.wutian.xml.file.task.TranslateTask;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -25,8 +24,25 @@ public class AddTransLateHelper implements AddTranslateTask.AddTranslateListener
 
     private Map<String, List<String>> mValuesData = new HashMap<>();
     public void addTranslate(File translateResFile, File resDir) {
+        startCheckPathIsRight(translateResFile);
         startAddTranslate(translateResFile, resDir);
         endThreadPool();
+    }
+
+    private boolean startCheckPathIsRight(File translateResFile) {
+        File[] valueDirArrays = translateResFile.listFiles();
+        for (File valueDir : valueDirArrays) {
+            if (valueDir.isHidden())
+                continue;
+            for (File file : valueDir.listFiles()) {
+                if (file.isDirectory()) {
+                    //has error file
+                    System.out.println(file.getAbsolutePath());
+                    throw new RuntimeException("Translate File Path Error!");
+                }
+            }
+        }
+        return true;
     }
 
     private void startAddTranslate(File translateFileDir, File originDir) {
@@ -120,6 +136,9 @@ public class AddTransLateHelper implements AddTranslateTask.AddTranslateListener
                         continue;
                     }
 
+                    //TODO check
+                    defaultValue = ReplaceSpecialCharUtils.replaceSpecialChar(defaultValue);
+//                    tryWriteErrorKey(line, defaultValue, translateFile);
                     writer.write("    " + defaultValue);
                     writer.flush();
                     writer.newLine();
@@ -140,6 +159,8 @@ public class AddTransLateHelper implements AddTranslateTask.AddTranslateListener
             }
         }
     }
+
+
 
     private void endThreadPool() {
         if (mTaskList.isEmpty())
@@ -176,5 +197,4 @@ public class AddTransLateHelper implements AddTranslateTask.AddTranslateListener
             }
         }).start();
     }
-
 }
