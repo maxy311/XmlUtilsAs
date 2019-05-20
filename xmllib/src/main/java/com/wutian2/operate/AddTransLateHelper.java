@@ -34,6 +34,9 @@ public class AddTransLateHelper implements AddTranslateTask.AddTranslateListener
         for (File valueDir : valueDirArrays) {
             if (valueDir.isHidden())
                 continue;
+            if (!valueDir.getName().startsWith("values"))
+                throw new RuntimeException("Translate File Path Error!");
+
             for (File file : valueDir.listFiles()) {
                 if (file.isDirectory()) {
                     //has error file
@@ -137,7 +140,7 @@ public class AddTransLateHelper implements AddTranslateTask.AddTranslateListener
                     }
 
                     //TODO check
-                    defaultValue = ReplaceSpecialCharUtils.replaceSpecialChar(defaultValue);
+                    defaultValue = ReplaceSpecialCharUtils.replaceSpecialChar(line, defaultValue);
 //                    tryWriteErrorKey(line, defaultValue, translateFile);
                     writer.write("    " + defaultValue);
                     writer.flush();

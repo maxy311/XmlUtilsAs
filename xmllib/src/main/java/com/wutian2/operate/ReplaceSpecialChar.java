@@ -121,6 +121,7 @@ public class ReplaceSpecialChar {
                 line = checkAndReplaceSpecialChar(line, "\u2029", " ", "2029"); //段落分隔符	行结束符
                 line = checkAndReplaceSpecialChar(line, "\uFEFF", " ", "FEFF");//字节顺序标记	空白
                 line = checkAndReplaceSpecialChar(line, "\u00A0", " ", "00A0");
+                line = checkAndReplaceSpecialChar(line, "&apos;", "\'", "&apos;"); //&apos;--->\'
 //                line = checkAndReplaceSpecialChar(line, "%", "%");
                 line = checkAndReplaceSpecialChar2(line); // '-------> \'
 

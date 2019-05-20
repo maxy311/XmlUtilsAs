@@ -38,6 +38,9 @@ public class ResNameTest {
         String targetValueDirPath = targetResDir.getAbsolutePath() + File.separator + originValuesDir.getName();
         File targetValueDir = checkToCreateDir(targetValueDirPath);
         for (File originValuesSubFile : originValuesDir.listFiles()) {
+            if (originValuesSubFile.isHidden() || originValuesSubFile.isFile())
+                continue;
+            System.out.println(originValuesSubFile.getAbsolutePath());
             for (File xmlFile : originValuesSubFile.listFiles()) {
                 String xmlFileName = xmlFile.getName();
                 if (!xmlFileName.endsWith(".xml")) {
@@ -53,7 +56,7 @@ public class ResNameTest {
                     throw new RuntimeException("get origin xml file error : " + xmlFile.getAbsolutePath());
                 }
 
-//                startToCopyFile(targetValueDir, xmlFile);
+                startToCopyFile(targetValueDir, xmlFile);
             }
         }
     }
