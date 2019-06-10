@@ -9,14 +9,14 @@ public class TranslateStarter {
     }
 
     private static void addTranslate() {
-        SplitUtils splitUtils = new SplitUtils();
-        splitUtils.startSplit();
+//        SplitUtils splitUtils = new SplitUtils();
+//        splitUtils.startSplit();
         System.out.println("Split Release Note End!!!!!!");
 
         TranslateHelpers.addTranslate("/Users/maxy/Desktop/res");
     }
 
     private static void getTranslate() {
-        TranslateHelpers.getTranslate("v4.7.88_ww");
+        TranslateHelpers.getTranslate("v4.8.8_ww");
     }
 }

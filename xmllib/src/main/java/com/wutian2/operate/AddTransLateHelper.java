@@ -61,8 +61,9 @@ public class AddTransLateHelper implements AddTranslateTask.AddTranslateListener
             if (translateFile.isDirectory()) {
                 File origin = new File(originDir, translateFile.getName());
                 if (!origin.exists()) {
-                    System.out.println(origin.getName());
-                    continue;
+                    origin.mkdir();
+//                    System.out.println(origin.getAbsolutePath() + "      " + origin.getName());
+//                    continue;
                 }
                 startAddTranslate(translateFile, origin);
             } else {

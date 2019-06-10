@@ -23,7 +23,7 @@ public class DeleteStringUtils {
         List<String> ids = new ArrayList<>();
 
 
-        ids.add("<string name=\"pay_purchased_caps");
+        ids.add("<string name=\"navigation_premium");
 //
 //        ids.add("<string name=\"purchased_items");
 //        ids.add("<string name=\"pay_purchased");
@@ -34,7 +34,7 @@ public class DeleteStringUtils {
 //        ids.add("<string name=\"new_version_guide_dialog_shareit");
 //
 //        ids.add("<string name=\"new_version_guide_dialog_daily");
-        DELETE_IDS.put("pay_strings.xml", ids);
+        DELETE_IDS.put("navigation_strings.xml", ids);
 
     }
 

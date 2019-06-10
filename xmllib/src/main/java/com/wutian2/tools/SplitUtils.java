@@ -81,6 +81,7 @@ public class SplitUtils {
         if (file.isDirectory())
             return false;
         String fileName = file.getName();
+
         if (!fileName.endsWith(".xml")) {
             return false;
         }
