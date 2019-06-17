@@ -207,4 +207,17 @@ public class FileUtils {
         }
 
     }
+
+    public static void deleteFile(File file) {
+        if (file.isDirectory()) {
+            for (File listFile : file.listFiles()) {
+                deleteFile(listFile);
+            }
+
+            if (file.listFiles().length == 0)
+                file.delete();
+        } else {
+            file.delete();
+        }
+    }
 }

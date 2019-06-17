@@ -19,7 +19,7 @@ import java.util.Set;
 
 public class GetSHAREitTranslate2 {
     private static final String LAST_TAG = "v4.8.30_4_test";
-    private static final String WRITE_FIELNMAE_SPLIT = "    //------------------------ %s  ------------------------\n";
+    public static final String WRITE_FIELNMAE_SPLIT = "    //-----------------------------";
 
     public static void main(String[] args) {
         GetSHAREitTranslate2 getSHAREitTranslate = new GetSHAREitTranslate2();
@@ -215,12 +215,15 @@ public class GetSHAREitTranslate2 {
             bw.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + "<resources>\n");
 
             for (String fileName : translateData.keySet()) {
-                bw.write(String.format(WRITE_FIELNMAE_SPLIT, fileName));
+                bw.write(WRITE_FIELNMAE_SPLIT +  fileName);
+                bw.write("\n");
+                bw.flush();
                 List<String> list = translateData.get(fileName);
                 for (String str : list) {
                     if (isNotTranslate(str))
                         continue;
                     bw.write("    " + str + "\n");
+                    bw.flush();
                 }
 
                 bw.write("\n\n\n");
@@ -251,7 +254,7 @@ public class GetSHAREitTranslate2 {
             valueDir = new File(shareitFile, "values");
         if (!valueDir.exists())
             valueDir.mkdir();
-        File file = new File(valueDir, module.toLowerCase() + "_strings.xml");
+        File file = new File(valueDir, module + "_strings.xml");
         try {
             if (!file.exists())
                 file.createNewFile();
