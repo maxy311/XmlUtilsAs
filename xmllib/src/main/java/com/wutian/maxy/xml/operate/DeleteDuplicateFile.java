@@ -3,15 +3,21 @@ package com.wutian.maxy.xml.operate;
 import java.io.File;
 
 public class DeleteDuplicateFile {
-    private static final String res = "/Users/maxy/Android/workspace/SHAREit/App/src/main/res";
+    private static final String res = "/Users/maxy/Android/workspace/SHAREit/BizLocal/LocalCommon/src/main/res";
+    private static final String BizLocal_ModuleLocal = "/Users/maxy/Android/workspace/SHAREit/BizLocal/ModuleLocal/src/main/res";
+    private static final String BizLocal_ModuleTransfer = "/Users/maxy/Android/workspace/SHAREit/BizLocal/ModuleTransfer/src/main/res";
+    private static final String BizGame_ModuleGame = "/Users/maxy/Android/workspace/SHAREit/BizGame/ModuleGame/src/main/res";
 
     public static void main(String[] args) {
 
         File resFile = new File(res);
         DeleteDuplicateFile deleteDuplicateFile = new DeleteDuplicateFile();
         //BizOnline:Online  ---
-        deleteDuplicateFile.startCheck(resFile, "/Users/maxy/Android/workspace/SHAREit/BizOnline/Online/src/main/res");
-//        deleteDuplicateFile.startCheck(resFile, "/Users/maxy/Android/workspace/SHAREit/BaseCore/src/main/res");
+        deleteDuplicateFile.startCheck(resFile, "/Users/maxy/Android/workspace/SHAREit/BaseCore/src/main/res");
+        deleteDuplicateFile.startCheck(new File(BizLocal_ModuleLocal), "/Users/maxy/Android/workspace/SHAREit/BaseCore/src/main/res");
+        deleteDuplicateFile.startCheck(new File(BizLocal_ModuleTransfer), "/Users/maxy/Android/workspace/SHAREit/BaseCore/src/main/res");
+        deleteDuplicateFile.startCheck(new File(BizGame_ModuleGame), "/Users/maxy/Android/workspace/SHAREit/BaseCore/src/main/res");
+
     }
 
     private void startCheck(File resFile, String path) {

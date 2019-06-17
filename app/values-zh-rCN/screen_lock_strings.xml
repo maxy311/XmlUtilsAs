@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="setting_screen_lock_msg">在锁屏时保护电池，并显示推荐内容</string>
+    <string name="setting_charging_hot_recommend_title">在充电锁屏显示推荐内容</string>
+    <string name="setting_screen_save_msg">加速充电, 防止过充, 优化电池</string>
+    <string name="screen_charging_trickle_description">充满后持续小电流充电十分钟，延长电池使用寿命</string>
+    <string name="screen_charging_dlg_content">1 关掉后, 您的电池将不能得到高效的保护!\n2 关掉后, 您将不能收到个性化推荐内容!</string>
+    <string name="screen_charging_dlg_btn_close">强行关闭</string>
+    <string name="screen_feature_msg">加速充电, 防止过充, 优化电池</string>
+    <string name="screen_charging_speed_description">当电量低于80%时，智能控制后台程序进程，以最快速度为手机充电</string>
+    <string name="screen_charging_dlg_btn_ok">我再想想</string>
+    <string name="screen_remain_charging_min">还需 %s 分钟</string>
+    <string name="screen_feature_title">开启智能充电保护</string>
+    <string name="screen_feature_content">个性化内容推荐</string>
+    <string name="screen_feature_not_remind">不再提醒</string>
+    <string name="screen_charging_continue_description">当电量逐渐充满时，逐渐减少电流以确定充满</string>
+    <string name="screen_charging_dlg_title">关闭充电保护</string>
+    <string name="screen_remain_charging_hr">还需 %1$s  小时 %2$s 分钟</string>
+    <string name="screen_charging_fully_status">充电完成，请拔掉充电器</string>
+    <string name="setting_charging_hot_recommend_msg1">仅在WiFi下显示</string>
+    <string name="setting_charging_hot_recommend_msg2">在数据网络和WiFi下显示</string>
+    <string name="setting_charging_hot_recommend_msg3">不显示</string>
+    <string name="screen_charging_speed_status">快速充电</string>
+    <string name="screen_feature_btn">立即开启</string>
+    <string name="setting_screen_lock_title">锁屏保护</string>
+</resources>

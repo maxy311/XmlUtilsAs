@@ -1,6 +1,6 @@
 package com.wutian2.tools;
 
-import com.Contants;
+import com.Constants;
 import com.wutian.utils.Utils;
 
 import java.io.BufferedReader;
@@ -14,7 +14,7 @@ public class SpecialChar2 {
     public static String SHAREIT_resPath = "/Users/maxy/Android/workspace/SHAREit/App/src/main/res";
 
     public static void main(String[] args) {
-        File file = new File(Contants.DESKTOP_PATH);
+        File file = new File(Constants.DESKTOP_PATH);
 
         File xmlFile = new File(file, "aaaaa.xml");
         if (!xmlFile.exists()) {

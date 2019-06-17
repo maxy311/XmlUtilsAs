@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 public class TranslateHelpers {
 //    private static String SHAREIT_resPath = "/Users/maxy/Android/workspace/SHAREit/App/src/main/res";
     /////////444444444444444////
-    private static String SHAREIT_resPath = "/Users/maxy/Android/workspace/SHAREit/BizOnline/Online/src/main/res";
+    private static String SHAREIT_resPath = "/Users/maxy/Android/workspace/SHAREit/BaseCore/src/main/res";
     private static String SHELL_PATH = "/Users/maxy/Android/workspace/XmlUtilsAs/git-for-all.sh";
     private static String SHAREIT_resPath_VALUE_OLD ="/Users/maxy/Android/workspace/SHAREit/App/src/main/res/values_old";
     private static String DESKTOP_PATH = "/Users/maxy/Desktop";

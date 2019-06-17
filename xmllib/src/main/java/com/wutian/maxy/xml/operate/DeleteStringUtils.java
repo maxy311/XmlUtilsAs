@@ -17,24 +17,17 @@ public class DeleteStringUtils {
     private static final String SPLIT = "\">";
 
     private static final Map<String, List<String>> DELETE_IDS = new HashMap<>();
-    private static final String res = "/Users/maxy/Android/workspace/SHAREit/App/src/main/res";
+    private static final String res = "/Users/maxy/Android/workspace/SHAREit/BizGame/src/main/res";
 
     static {
         List<String> ids = new ArrayList<>();
 
+        ids.add("<string name=\"content_file_not_exist");
+        ids.add("<string name=\"content_app_run_failed");
+        ids.add("<string name=\"content_contact_import_success");
+        ids.add("<string name=\"content_contact_import_failed");
 
-        ids.add("<string name=\"navigation_premium");
-//
-//        ids.add("<string name=\"purchased_items");
-//        ids.add("<string name=\"pay_purchased");
-//        ids.add("<string name=\"pay_purchased_page_load_failed");
-//        ids.add("<string name=\"pau_purchased_success");
-
-//        ids.add("<string name=\"new_version_guide_dialog_local");
-//        ids.add("<string name=\"new_version_guide_dialog_shareit");
-//
-//        ids.add("<string name=\"new_version_guide_dialog_daily");
-        DELETE_IDS.put("navigation_strings.xml", ids);
+        DELETE_IDS.put("content_strings.xml", ids);
 
     }
 

@@ -11,7 +11,7 @@ public class TranslateStarter {
     private static void addTranslate() {
 //        SplitUtils splitUtils = new SplitUtils();
 //        splitUtils.startSplit();
-        System.out.println("Split Release Note End!!!!!!");
+//        System.out.println("Split Release Note End!!!!!!");
 
         TranslateHelpers.addTranslate("/Users/maxy/Desktop/res");
     }
