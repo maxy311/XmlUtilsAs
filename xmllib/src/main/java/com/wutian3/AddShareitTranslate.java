@@ -12,6 +12,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class AddShareitTranslate {
     private static String TRANSLATE_DIR = "SHAREit_Translate";
@@ -27,6 +31,9 @@ public class AddShareitTranslate {
 
         File file = new File(Constants.DESKTOP_PATH + "/" + TRANSLATE_DIR);
         checkTranslateDir(file);
+        //0. add file name tag
+        addFileNameTag(file);
+
         // 1. split file
         slipFile(file);
 
@@ -34,6 +41,67 @@ public class AddShareitTranslate {
         for (File listFile : translateFile.listFiles()) {
             addTranslate(listFile);
         }
+    }
+
+    private void addFileNameTag(File file) {
+        Map<String, List<String>> valuesMap = readValuesToMap(file);
+        for (File listFile : file.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                if (file.isHidden())
+                    return false;
+                if (file.getName().equals("values"))
+                    return false;
+                return true;
+            }
+        })) {
+            for (File valueFile : listFile.listFiles(new FileFilter() {
+                @Override
+                public boolean accept(File file) {
+                    if (file.isHidden())
+                        return false;
+                    if (!file.getName().endsWith("xml"))
+                        return false;
+                    return true;
+                }
+            })) {
+                List<String> stringList = valuesMap.get(valueFile.getName());
+                Map<String, String> stringMap = FileUtils.readStringToMap(valueFile);
+                Set<String> keySet = stringMap.keySet();
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(valueFile))) {
+                    for (String str : stringList) {
+                        String key = str.trim().split("\">")[0];
+                        if (keySet.contains(key)) {
+                            str = "    " + stringMap.get(key);
+                        }
+                        bw.write(str);
+                        bw.newLine();
+                        bw.flush();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private Map<String, List<String>> readValuesToMap(File file) {
+        File valuesDir = new File(file, "values");
+        if (!valuesDir.exists()) {
+            throw new RuntimeException("values path error:" + valuesDir.getAbsolutePath());
+        }
+        Map<String, List<String>> valuesMap = new HashMap<>();
+        for (File listFile : valuesDir.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                if (file.isHidden())
+                    return false;
+                return true;
+            }
+        })) {
+            valuesMap.put(listFile.getName(), FileUtils.readXmlToList(listFile));
+        }
+        return valuesMap;
     }
 
     private void addTranslate(File file) {
@@ -128,6 +196,7 @@ public class AddShareitTranslate {
                 } else {
                     if (bw == null) {
                         System.out.println("ERROR ::: " + line);
+                        continue;
                     }
 
                     line = line.trim();
@@ -166,7 +235,8 @@ public class AddShareitTranslate {
                     }
                 }
             }
-            writeLine(bw, "</resources>");
+            if (bw != null)
+                writeLine(bw, "</resources>");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -250,7 +320,7 @@ public class AddShareitTranslate {
         FileUtils.fileChannelCopy(releaseNoteFile, file);
     }
 
-    private File getShareitTranslateDir() {
+    public static  File getShareitTranslateDir() {
         File shareitFile = new File(SHAREIT_TRANSLATE_PATH);
         if (shareitFile.exists())
             shareitFile.mkdir();

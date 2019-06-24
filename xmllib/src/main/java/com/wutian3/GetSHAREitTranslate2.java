@@ -125,6 +125,7 @@ public class GetSHAREitTranslate2 {
                 if (isNotTranslate(value))
                     continue;
                 keys.add(key);
+                list.add(value);
             }
 
             if (!list.isEmpty()) {
