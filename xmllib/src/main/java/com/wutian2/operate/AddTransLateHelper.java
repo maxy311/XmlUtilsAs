@@ -5,9 +5,11 @@ import com.wutian.xml.file.FileUtils;
 import com.wutian.xml.file.task.AddTranslateTask;
 import com.wutian.xml.file.task.Task;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
@@ -102,7 +104,15 @@ public class AddTransLateHelper implements AddTranslateTask.AddTranslateListener
         if (!valueXXFile.exists()) {
             try {
                 valueXXFile.createNewFile();
-                FileUtils.copyFile(translateFile, valueXXFile);
+                List<String> stringList = FileUtils.readXmlToList(translateFile);
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(valueXXFile))) {
+                    for (String str : stringList) {
+                        str = ReplaceSpecialCharUtils.replaceSpecialChar(str, str);
+                        bw.write(str);
+                        bw.newLine();
+                        bw.flush();
+                    }
+                }
                 return;
             } catch (IOException e) {
             }

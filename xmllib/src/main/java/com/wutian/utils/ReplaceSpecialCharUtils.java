@@ -11,7 +11,8 @@ public class ReplaceSpecialCharUtils {
         line = checkAndReplaceSpecialChar2(line); // '-------> \'
 
         try {
-            line = replaceSpaceChar(originLine, line);
+            if (!originLine.equals(line))
+                line = replaceSpaceChar(originLine, line);
         } catch (Exception e) {
             System.out.println(e.toString());
         }
