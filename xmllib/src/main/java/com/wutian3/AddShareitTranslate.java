@@ -60,7 +60,10 @@ public class AddShareitTranslate {
                 public boolean accept(File file) {
                     if (file.isHidden())
                         return false;
-                    if (!file.getName().endsWith("xml"))
+                    String fileName = file.getName();
+                    if (!fileName.endsWith("xml"))
+                        return false;
+                    if (fileName.equalsIgnoreCase("releasenote"))
                         return false;
                     return true;
                 }

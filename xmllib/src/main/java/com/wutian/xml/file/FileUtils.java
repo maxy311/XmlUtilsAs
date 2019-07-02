@@ -176,7 +176,7 @@ public class FileUtils {
                     }
                 } else if ((line.contains("-array") || line.contains("-array")) || (line.startsWith("<item>") && line.endsWith("</item>"))) {
                     if ((line.contains("<string-array") || line.contains("<integer-array"))) {
-                        str = line;
+                        str = line.split("\">")[0];
                         sb.append(line);
                     } else if (line.startsWith("<item>") && line.endsWith("</item>")) {
                         if (str == "" || str.equals(""))

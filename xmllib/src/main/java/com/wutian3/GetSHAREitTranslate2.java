@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class GetSHAREitTranslate2 {
-    private static final String LAST_TAG = "v4.8.30_4_test";
+    private static final String LAST_TAG = "v4.8.58_ww";
     public static final String WRITE_FIELNMAE_SPLIT = "    //-----------------------------";
 
     public static void main(String[] args) {
@@ -147,17 +147,17 @@ public class GetSHAREitTranslate2 {
                 if (preValueMap == null)
                     continue;
 
-//            if (!preValueMap.containsKey(key)) {
-//                keys.add(key);
-//                list.add(value);
-//                continue;
-//            }
-//
-//            String preValue = preValueMap.get(key);
-//            if (!preValue.equals(value)) {
-//                keys.add(key);
-//                list.add(value);
-//            }
+                if (!preValueMap.containsKey(key)) {
+                    keys.add(key);
+                    list.add(value);
+                    continue;
+                }
+
+                String preValue = preValueMap.get(key);
+                if (!preValue.equals(value)) {
+                    keys.add(key);
+                    list.add(value);
+                }
             }
             if (!list.isEmpty()) {
                 transValueMap.put(fileName, list);
@@ -216,7 +216,7 @@ public class GetSHAREitTranslate2 {
             bw.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + "<resources>\n");
 
             for (String fileName : translateData.keySet()) {
-                bw.write(WRITE_FIELNMAE_SPLIT +  fileName);
+                bw.write(WRITE_FIELNMAE_SPLIT + fileName);
                 bw.write("\n");
                 bw.flush();
                 List<String> list = translateData.get(fileName);
