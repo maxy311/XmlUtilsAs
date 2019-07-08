@@ -63,7 +63,9 @@ public class AddShareitTranslate {
                     String fileName = file.getName();
                     if (!fileName.endsWith("xml"))
                         return false;
-                    if (fileName.equalsIgnoreCase("releasenote"))
+                    if (fileName.toLowerCase().contains("releasenote"))
+                        return false;
+                    if (fileName.toLowerCase().contains("release"))
                         return false;
                     return true;
                 }
@@ -291,16 +293,16 @@ public class AddShareitTranslate {
             return false;
         String fileName = file.getName();
 
+        if (fileName.contains("push"))
+            return false;
+        if (fileName.toLowerCase().contains("releasenote"))
+            return false;
+        if (fileName.toLowerCase().contains("release"))
+            return false;
+
         if (!fileName.endsWith(".xml")) {
             return false;
         }
-
-        if (fileName.contains("push"))
-            return false;
-        if (fileName.contains("releasenote"))
-            return false;
-        if (fileName.contains("Release"))
-            return false;
         return true;
     }
 

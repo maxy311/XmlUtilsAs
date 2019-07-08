@@ -129,9 +129,6 @@ public class AddTransLateHelper implements AddTranslateTask.AddTranslateListener
             String defaultValue;
             for (String line : lines) {
                 String[] strs = line.trim().split("\">");
-                if (line.contains("<string-array") || line.contains("<integer-array"))
-                    strs = line.trim().split("\n");
-
                 if (strs.length >= 2) {
                     String key = strs[0];
                     defaultValue = null;
@@ -142,12 +139,16 @@ public class AddTransLateHelper implements AddTranslateTask.AddTranslateListener
                     }
 
                     if (null == defaultValue && valueXXMap.size() != 0) {
-                        if (key.contains("translate") || key.contains("translatable")
-                                || key.contains("<plurals name="))
-                            continue;
+                        if (key.contains("translate")) {
+                            key = key.replace("\" translate=\"false", "");
+                            defaultValue = valueXXMap.get(key);
+                        } else if (key.contains("translatable")) {
+                            key = key.replace("\" translatable=\"false", "");
+                            defaultValue = valueXXMap.get(key);
+                        }
 
-                        System.out.println(valueXXFile.getParentFile().getName() + "    " + valueXXFile.getName() + "   don't contains " + key);
-                        continue;
+                        if (defaultValue == null)
+                            continue;
                     }
 
                     //TODO check
