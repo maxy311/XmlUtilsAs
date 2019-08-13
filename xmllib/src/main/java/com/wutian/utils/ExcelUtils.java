@@ -197,7 +197,7 @@ public class ExcelUtils {
      * @return
      * @throws IOException
      */
-    private static Workbook getWorkbook(File newFile) throws Exception {
+    public static Workbook getWorkbook(File newFile) throws Exception {
         Workbook wb;
         if (newFile.exists()) {
             // Load existing
