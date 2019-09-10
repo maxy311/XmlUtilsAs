@@ -29,9 +29,9 @@ public class GetSpecialStrings {
         GetSpecialStrings getSpecialStrings = new GetSpecialStrings();
 
 //        //BaseCore -------> App
-//        File appRes = new File(Constants.APP + "/res");
-//        File baseCore = new File(Constants.BASECORE + "/res/values");
-//        getSpecialStrings.star(baseCore, appRes);
+        File appRes = new File(Constants.APP + "/res");
+        File baseCore = new File(Constants.BIZGAME_MODULEGAME + "/res/values");
+        getSpecialStrings.star(baseCore, appRes);
 
 //            //BaseCore ------->Online
 //        File onlineRes = new File(Constants.BIZONLINE_ONLINE + "/res");
@@ -104,7 +104,7 @@ public class GetSpecialStrings {
 //        getSpecialStrings.star(baseCore, bizGame);
 
 //        //BaseCore -------> App
-        File appRes = new File(Constants.APP + "/res");
+//        File appRes = new File(Constants.APP + "/res");
 //        File baseCore = new File(Constants.BIZONLINE_ONLINE + "/res/values");
 //        getSpecialStrings.star(baseCore, appRes);
 
@@ -160,9 +160,9 @@ public class GetSpecialStrings {
 //        File bizGame = new File(Constants.BIZGAME_MODULEGAME + "/res/values");
 //        getSpecialStrings.star(bizGame, appRes);
 
-        File bizGame = new File(Constants.BASECORE + "/res/values");
-        appRes = new File(Constants.BIZBASIC_MODULESETTING+ "/res");
-        getSpecialStrings.star(bizGame, appRes);
+//        File bizGame = new File(Constants.APP + "/res/values");
+//        appRes = new File(Constants.BIZBASIC_MODULESETTING+ "/res");
+//        getSpecialStrings.star(bizGame, appRes);
     }
 
     private void star(File checkFile, File deleteRes) {

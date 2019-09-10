@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class GetSHAREitTranslate2 {
-    private static final String LAST_TAG = "v4.8.58_ww";
+    private static final String LAST_TAG = "v5.0.88_ww";
     public static final String WRITE_FIELNMAE_SPLIT = "    //-----------------------------";
 
     public static void main(String[] args) {

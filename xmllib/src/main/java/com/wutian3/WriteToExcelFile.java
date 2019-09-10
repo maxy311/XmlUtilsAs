@@ -167,6 +167,8 @@ public class WriteToExcelFile {
                     continue;
                 }
 
+                if (line == null || line.equals(""))
+                    continue;
                 if (values == null)
                     throw new RuntimeException("Create Map is Empty");
 
