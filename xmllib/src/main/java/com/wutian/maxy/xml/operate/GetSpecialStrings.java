@@ -29,9 +29,9 @@ public class GetSpecialStrings {
         GetSpecialStrings getSpecialStrings = new GetSpecialStrings();
 
 //        //BaseCore -------> App
-        File appRes = new File(Constants.APP + "/res");
-        File baseCore = new File(Constants.BIZGAME_MODULEGAME + "/res/values");
-        getSpecialStrings.star(baseCore, appRes);
+        File appRes = new File(Constants.APP + "/res/values");
+        File baseCore = new File(Constants.BASECORE + "/res");
+        getSpecialStrings.star(appRes, baseCore);
 
 //            //BaseCore ------->Online
 //        File onlineRes = new File(Constants.BIZONLINE_ONLINE + "/res");

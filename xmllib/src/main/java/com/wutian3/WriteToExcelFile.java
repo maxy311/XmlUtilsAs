@@ -41,6 +41,7 @@ public class WriteToExcelFile {
             if (isReleasenoteFile(valueFile))
                 continue;
             File valueZhFile = new File(valueZhDir, valueFile.getName());
+            System.out.println(valueZhFile.getAbsolutePath());
             Map<String, Map<String, List<String>>> map = getWriteExcelData(valueFile, valueZhFile);
             dataMap.put(valueFile.getName(), map);
         }
@@ -138,7 +139,7 @@ public class WriteToExcelFile {
             for (Map.Entry<String, String> entry : keyValue.entrySet()) {
                 String entryKey = entry.getKey();
                 String entryValue = entry.getValue();
-                String zhEntryValue = zhKeyValue.get(entryKey);
+                String zhEntryValue = zhKeyValue != null ? zhKeyValue.get(entryKey) : "";
                 List<String> list = new ArrayList<>();
                 list.add(zhEntryValue);
                 list.add(entryValue);
