@@ -56,6 +56,11 @@ public class JsAssertHelper {
         if (!jsDir.exists())
             throw new RuntimeException(jsDir.getAbsolutePath() + "  not exit");
 
+        for (File file : jsDir.listFiles()) {
+            file.delete();
+        }
+        System.out.println("after delete : " +jsDir.listFiles().length);
+
         Map<String, String> jsUrls = getJsUrls();
         Set<String> keys = jsUrls.keySet();
         CountDownLatch countDownLatch = new CountDownLatch(keys.size());
