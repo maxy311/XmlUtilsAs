@@ -15,6 +15,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,26 +26,33 @@ import java.util.zip.ZipOutputStream;
 
 public class JsAssertHelper {
 
+    private static List<JSItem> getJsUrls() {
+        List<JSItem> itemList = new ArrayList<>();
+        JSItem jsItem = new JSItem("facebook", "http://dl.files.wshareit.com/download/js/facebook.js", 0);
+        itemList.add(jsItem);
 
-    private static Map<String, String> getJsUrls() {
-        Map<String, String> map = new HashMap<>();
-        String facebook = "http://dl.files.wshareit.com/download/js/facebook.js";
-        map.put("facebook", facebook);
-        String tiktok = "http://dl.files.wshareit.com/download/js/tiktok.js";
-        map.put("tiktok", tiktok);
-        String instagram = "http://dl.files.wshareit.com/download/js/instagram.js";
-        map.put("instagram", instagram);
-        String twitter = "http://dl.files.wshareit.com/download/js/twitter.js";
-        map.put("twitter", twitter);
-        String ted = "http://dl.files.wshareit.com/download/js/ted.js";
-        map.put("ted", ted);
-        String dailymotion = "http://dl.files.wshareit.com/download/js/dailymotion.js";
-        map.put("dailymotion", dailymotion);
-        String tumblr = "http://dl.files.wshareit.com/download/js/tumblr.js";
-        map.put("tumblr", tumblr);
-        return map;
+        jsItem = new JSItem("tiktok", "http://dl.files.wshareit.com/download/js/tiktok.js", 0);
+        itemList.add(jsItem);
+
+
+        jsItem = new JSItem("instagram", "http://dl.files.wshareit.com/download/js/instagram.js", 0);
+        itemList.add(jsItem);
+
+
+        jsItem = new JSItem("twitter", "http://dl.files.wshareit.com/download/js/twitter.js", 0);
+        itemList.add(jsItem);
+
+
+        jsItem = new JSItem("ted", "http://dl.files.wshareit.com/download/js/ted.js", 0);
+        itemList.add(jsItem);
+
+        jsItem = new JSItem("dailymotion", "http://dl.files.wshareit.com/download/js/dailymotion.js", 0);
+        itemList.add(jsItem);
+
+        jsItem = new JSItem("tumblr", "http://dl.files.wshareit.com/download/js/tumblr.js", 0);
+        itemList.add(jsItem);
+        return itemList;
     }
-
 
     public static void main(String[] args) {
         writeJsContent();
@@ -61,13 +69,12 @@ public class JsAssertHelper {
         }
         System.out.println("after delete : " +jsDir.listFiles().length);
 
-        Map<String, String> jsUrls = getJsUrls();
-        Set<String> keys = jsUrls.keySet();
-        CountDownLatch countDownLatch = new CountDownLatch(keys.size());
-        for (String key : keys) {
-            String jsUrl = jsUrls.get(key);
+        List<JSItem> jsUrls = getJsUrls();
+        CountDownLatch countDownLatch = new CountDownLatch(jsUrls.size());
+        for (JSItem jsItem : jsUrls) {
+            String jsUrl = jsItem.mUrl;
             String md5 = md5(jsUrl);
-            System.out.println(key + "     " + md5);
+            System.out.println(jsItem.mCheckType + "     " + md5);
             writeFile(jsDir, md5, jsUrl, countDownLatch);
         }
 
@@ -178,6 +185,18 @@ public class JsAssertHelper {
             zipos.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static class JSItem{
+        private String mCheckType;
+        private String mUrl;
+        private int mVersion;
+
+        public JSItem(String checkType, String url, int version) {
+            mCheckType = checkType;
+            mUrl = url;
+            mVersion = version;
         }
     }
 }
